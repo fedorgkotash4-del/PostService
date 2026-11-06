@@ -22,3 +22,4 @@ public class Posting
     public float Price { get; set; }
     public DateTime CreatedAt { get; set; }
 }
+

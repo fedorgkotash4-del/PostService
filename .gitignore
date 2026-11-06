@@ -2,3 +2,7 @@ bin/
 obj/
 .vs/
 *.log
+Reports/
+*.docx
+*.pdf
+Untitled-1.txt
