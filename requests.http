@@ -1,0 +1,67 @@
+@baseUrl = http://localhost:5036
+# ПР-38. Запустіть API та виконуйте Send Request зверху вниз.
+# Спочатку виконайте createPosting; інші запити отримують його Id автоматично.
+
+### 1. Get all postings — 200 OK
+GET {{baseUrl}}/postings
+Accept: application/json
+
+### 2. Get existing posting — 200 OK
+GET {{baseUrl}}/postings/1
+Accept: application/json
+
+### 3. Get non-existing posting — 404 Not Found
+GET {{baseUrl}}/postings/999999
+
+### 4. Create new posting — 201 Created; Location: /postings/{id}
+# @name createPosting
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Ivan",
+  "to": "Olena",
+  "content": "Documents",
+  "deliveryType": "Department",
+  "weight": 0.5,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 100,
+  "price": 15
+}
+
+### 5. Check created posting in full list — 200 OK
+GET {{baseUrl}}/postings
+Accept: application/json
+
+### 6. Get created posting before update — 200 OK
+GET {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
+Accept: application/json
+
+### 7. Update the same posting — 200 OK
+PUT {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "from": "Ivan",
+  "to": "Olena",
+  "content": "Documents (updated)",
+  "deliveryType": "Courier",
+  "weight": 0.6,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 120,
+  "price": 20
+}
+
+### 8. Check saved changes — 200 OK; updated content, weight, value, price
+GET {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
+Accept: application/json
+
+### 9. Delete the same posting — 204 No Content; empty response body
+DELETE {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
+
+### 10. Get deleted posting — 404 Not Found
+GET {{baseUrl}}/postings/{{createPosting.response.body.$.id}}

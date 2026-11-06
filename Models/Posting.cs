@@ -1,5 +1,8 @@
+using System.Text.Json.Serialization;
+
 namespace PostService.Models;
 
+[JsonConverter(typeof(JsonStringEnumConverter<DeliveryType>))]
 public enum DeliveryType
 {
     Department,
@@ -22,4 +25,3 @@ public class Posting
     public float Price { get; set; }
     public DateTime CreatedAt { get; set; }
 }
-
