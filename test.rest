@@ -1,1 +1,44 @@
-GET http://localhost:5036
+@baseUrl = http://localhost:5036
+
+### ПР-36 — повідомлення
+GET {{baseUrl}}/
+
+### ПР-37 — усі відправлення (200)
+GET {{baseUrl}}/postings
+
+### Одне відправлення (200)
+GET {{baseUrl}}/postings/1
+
+### Створення (201). На чистому запуску новий Id дорівнює 3
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Iryna", "to": "Taras", "content": "Laptop",
+  "deliveryType": 2, "weight": 2.1,
+  "width": 35, "height": 8, "depth": 25,
+  "value": 25000, "price": 150
+}
+
+### Редагування (200). За потреби замініть 3 на Id з відповіді POST
+PUT {{baseUrl}}/postings/3
+Content-Type: application/json
+
+{
+  "from": "Iryna", "to": "Taras", "content": "Laptop and charger",
+  "deliveryType": 1, "weight": 2.5,
+  "width": 35, "height": 10, "depth": 25,
+  "value": 26000, "price": 180
+}
+
+### Перевірка оновлення
+GET {{baseUrl}}/postings/3
+
+### Видалення (204)
+DELETE {{baseUrl}}/postings/3
+
+### Перевірка видалення (404)
+GET {{baseUrl}}/postings/3
+
+### Відсутній ресурс (404)
+DELETE {{baseUrl}}/postings/999999

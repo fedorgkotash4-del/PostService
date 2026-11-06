@@ -1,22 +1,20 @@
-# Практична робота 36 — PostService
+# PostService — практичні роботи 36 і 37
 
-1. У Visual Studio Code виберіть Файл → Відкрити папку → PostService.
-2. Відкрийте Термінал → Новий термінал.
-3. Виконайте:
-
-   dotnet run --launch-profile http
-
-4. Відкрийте http://localhost:5036/ у браузері.
-   Відповідь: Це API поштового клієнта.
-
-Для перевірки через test.rest встановіть у VS Code розширення REST Client,
-відкрийте test.rest і натисніть Send Request. Очікується 200 OK.
-Зупинка сервера: Ctrl+C. Перед наступним запуском зупиніть попередній.
+Відкрийте PostService.code-workspace у VS Code.
+Запуск у терміналі: dotnet run --launch-profile http
+Адреса: http://localhost:5036/
+Зупинка: Ctrl+C. Не запускайте другу копію сервера на тому самому порту.
 Потрібен .NET SDK 10.
 
-## Короткі висновки
-Створено вебпроєкт PostService на основі Minimal API.
-У файлі Program.cs налаштовано кореневий GET-маршрут, який повертає
-повідомлення «Це API поштового клієнта.». Для запуску через HTTP
-у launchSettings.json задано порт 5036. Підготовлено файл test.rest
-для перевірки відповіді сервера HTTP-запитом.
+## Перевірка ПР-37
+Встановіть REST Client у VS Code. Відкрийте test.rest і виконуйте запити
+через Send Request у порядку зверху вниз. Після запуску є записи з Id 1 і 2.
+GET /postings — усі записи; GET /postings/1 — один запис.
+POST /postings — створення (201 і заголовок Location).
+PUT /postings/{id} — оновлення (200).
+DELETE /postings/{id} — видалення (204).
+Для відсутнього Id GET, PUT та DELETE повертають 404.
+DeliveryType у JSON: 0 — Department, 1 — Courier, 2 — ExpressCourier.
+Id і CreatedAt нового запису задає сервер. PUT зберігає Id та CreatedAt.
+Дані зберігаються у List<Posting> і скидаються після перезапуску.
+Кореневий маршрут із ПР-36 збережено.
