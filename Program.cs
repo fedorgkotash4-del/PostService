@@ -1,86 +1,51 @@
-using PostService.Models;
+using PostService.Dtos;
+using PostService.Mappings;
+using PostService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<IPostingService, PostingService>();
 var app = builder.Build();
 
-var postings = new List<Posting>
+// Перетворення помилок вхідних даних сервісу на HTTP 400.
+app.Use(async (context, next) =>
 {
-    new Posting
+    try { await next(context); }
+    catch (ArgumentException ex) when (!context.Response.HasStarted)
     {
-        Id = 1, From = "Alice", To = "Bob", Content = "Books",
-        DeliveryType = DeliveryType.Courier,
-        Weight = 2.5f, Width = 30, Height = 20, Depth = 10,
-        Value = 50f, Price = 10f, CreatedAt = DateTime.UtcNow
-    },
-    new Posting
-    {
-        Id = 2, From = "Olena", To = "Andrii", Content = "Documents",
-        DeliveryType = DeliveryType.Department,
-        Weight = 0.5f, Width = 25, Height = 2, Depth = 18,
-        Value = 100f, Price = 5f, CreatedAt = DateTime.UtcNow
+        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        await context.Response.WriteAsJsonAsync(new { error = ex.Message });
     }
-};
-// Лічильник не залежить від наявності записів у списку.
-var nextId = postings.Max(p => p.Id) + 1;
-var sync = new object();
+});
 
 app.MapGet("/", () => "Це API поштового клієнта.");
 
-app.MapGet("/postings", () =>
+app.MapGet("/postings", (IPostingService service) =>
+    Results.Ok(service.GetAll().Select(PostingMapper.ToPostingGetDto)));
+
+app.MapGet("/postings/{id:int}", (int id, IPostingService service) =>
 {
-    lock (sync) { return Results.Json(postings); }
+    var posting = service.Find(id);
+    return posting is null ? Results.NotFound()
+        : Results.Ok(PostingMapper.ToPostingGetDto(posting));
 });
 
-app.MapGet("/postings/{id:int}", (int id) =>
+app.MapPost("/postings", (PostingPostDto dto, IPostingService service) =>
 {
-    lock (sync)
-    {
-        var posting = postings.FirstOrDefault(p => p.Id == id);
-        return posting is null ? Results.NotFound() : Results.Json(posting);
-    }
+    var posting = service.Create(PostingMapper.ToPosting(dto));
+    var result = PostingMapper.ToPostingGetDto(posting);
+    return Results.Created($"/postings/{result.Id}", result);
 });
 
-app.MapPost("/postings", (Posting posting) =>
+app.MapPut("/postings/{id:int}", (int id, PostingPutDto dto, IPostingService service) =>
 {
-    lock (sync)
-    {
-        posting.Id = nextId++;
-        posting.CreatedAt = DateTime.UtcNow;
-        postings.Add(posting);
-        return Results.Created($"/postings/{posting.Id}", posting);
-    }
+    if (id != dto.Id)
+        return Results.BadRequest(new { error = "Id у маршруті та тілі запиту мають збігатися." });
+    var posting = service.Update(PostingMapper.ToPosting(dto));
+    return posting is null ? Results.NotFound()
+        : Results.Ok(PostingMapper.ToPostingGetDto(posting));
 });
 
-app.MapPut("/postings/{id:int}", (int id, Posting updated) =>
-{
-    lock (sync)
-    {
-        var posting = postings.FirstOrDefault(p => p.Id == id);
-        if (posting is null) return Results.NotFound();
-
-        posting.From = updated.From;
-        posting.To = updated.To;
-        posting.Content = updated.Content;
-        posting.DeliveryType = updated.DeliveryType;
-        posting.Weight = updated.Weight;
-        posting.Width = updated.Width;
-        posting.Height = updated.Height;
-        posting.Depth = updated.Depth;
-        posting.Value = updated.Value;
-        posting.Price = updated.Price;
-        return Results.Ok(posting);
-    }
-});
-
-app.MapDelete("/postings/{id:int}", (int id) =>
-{
-    lock (sync)
-    {
-        var posting = postings.FirstOrDefault(p => p.Id == id);
-        if (posting is null) return Results.NotFound();
-        postings.Remove(posting);
-        return Results.NoContent();
-    }
-});
+app.MapDelete("/postings/{id:int}", (int id, IPostingService service) =>
+    service.Delete(id) == 0 ? Results.NotFound() : Results.NoContent());
 
 app.Run();

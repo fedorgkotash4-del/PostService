@@ -17,7 +17,7 @@ Content-Type: application/json
   "from": "Iryna", "to": "Taras", "content": "Laptop",
   "deliveryType": 2, "weight": 2.1,
   "width": 35, "height": 8, "depth": 25,
-  "value": 25000, "price": 150
+  "value": 25000
 }
 
 ### Редагування (200). За потреби замініть 3 на Id з відповіді POST
@@ -25,7 +25,7 @@ PUT {{baseUrl}}/postings/3
 Content-Type: application/json
 
 {
-  "from": "Iryna", "to": "Taras", "content": "Laptop and charger",
+  "from": "Iryna", "to": "Taras", "content": "Laptop and charger", "id": 3,
   "deliveryType": 1, "weight": 2.5,
   "width": 35, "height": 10, "depth": 25,
   "value": 26000, "price": 180

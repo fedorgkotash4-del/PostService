@@ -1,0 +1,104 @@
+@baseUrl = http://localhost:5036
+# ПР-39. Виконуйте Send Request зверху вниз. Вага — кг, ціна — грн.
+# Навчальні тарифи: Department 40 + 10/кг; Courier 60 + 15/кг;
+# ExpressCourier 100 + 25/кг. Ціна POST розраховується сервером.
+
+### Усі відправлення — 200
+GET {{baseUrl}}/postings
+
+### POST Department — 201; автоматична ціна 60 грн
+# @name department39
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Ivan",
+  "to": "Olena",
+  "content": "Documents",
+  "deliveryType": "Department",
+  "weight": 2,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 100
+}
+
+### POST Courier — 201; автоматична ціна 90 грн
+# @name courier39
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Ivan",
+  "to": "Olena",
+  "content": "Documents",
+  "deliveryType": "Courier",
+  "weight": 2,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 100
+}
+
+### POST ExpressCourier — 201; автоматична ціна 150 грн
+# @name express39
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Ivan",
+  "to": "Olena",
+  "content": "Documents",
+  "deliveryType": "ExpressCourier",
+  "weight": 2,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 100
+}
+
+### Перевірка збереженої серверної ціни — 200, price = 60
+GET {{baseUrl}}/postings/{{department39.response.body.$.id}}
+
+### Оновлення через PostingPutDto — 200. Id у тілі та маршруті збігаються
+PUT {{baseUrl}}/postings/{{department39.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "id": {{department39.response.body.$.id}},
+  "from": "Ivan", "to": "Olena", "content": "Documents (updated)",
+  "deliveryType": "Courier", "weight": 0.6,
+  "width": 20, "height": 15, "depth": 2,
+  "value": 120, "price": 20
+}
+
+### Підтвердження оновлення — 200
+GET {{baseUrl}}/postings/{{department39.response.body.$.id}}
+
+### Видалення — 204
+DELETE {{baseUrl}}/postings/{{department39.response.body.$.id}}
+
+### Видалений запис — 404
+GET {{baseUrl}}/postings/{{department39.response.body.$.id}}
+
+### Спроба підмінити службові поля — вони відсутні у PostingPostDto та ігноруються
+# Очікується price = 45, новий серверний Id та поточний CreatedAt
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "id": 999999, "createdAt": "2000-01-01T00:00:00Z", "price": 1,
+  "from": "Ivan", "to": "Olena", "content": "Documents",
+  "deliveryType": "Department", "weight": 0.5,
+  "width": 20, "height": 15, "depth": 2, "value": 100
+}
+
+### Некоректна вага — 400
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Ivan", "to": "Olena", "content": "Documents",
+  "deliveryType": "Department", "weight": -1,
+  "width": 20, "height": 15, "depth": 2, "value": 100
+}

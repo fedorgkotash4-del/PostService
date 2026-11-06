@@ -27,8 +27,7 @@ Content-Type: application/json
   "width": 20,
   "height": 15,
   "depth": 2,
-  "value": 100,
-  "price": 15
+  "value": 100
 }
 
 ### 5. Check created posting in full list — 200 OK
@@ -46,6 +45,7 @@ Content-Type: application/json
 {
   "from": "Ivan",
   "to": "Olena",
+  "id": {{createPosting.response.body.$.id}},
   "content": "Documents (updated)",
   "deliveryType": "Courier",
   "weight": 0.6,
