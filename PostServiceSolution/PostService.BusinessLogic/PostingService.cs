@@ -1,6 +1,7 @@
+using PostService.CommonTypes;
 using PostService.Models;
 
-namespace PostService.Services;
+namespace PostService.BusinessLogic;
 
 public class PostingService : IPostingService
 {
@@ -94,3 +95,4 @@ public class PostingService : IPostingService
         Value = p.Value, Price = p.Price, CreatedAt = p.CreatedAt
     };
 }
+

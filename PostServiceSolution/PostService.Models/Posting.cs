@@ -1,14 +1,6 @@
-using System.Text.Json.Serialization;
+using PostService.CommonTypes;
 
 namespace PostService.Models;
-
-[JsonConverter(typeof(JsonStringEnumConverter<DeliveryType>))]
-public enum DeliveryType
-{
-    Department,
-    Courier,
-    ExpressCourier
-}
 
 public class Posting
 {
@@ -25,3 +17,4 @@ public class Posting
     public float Price { get; set; }
     public DateTime CreatedAt { get; set; }
 }
+

@@ -1,9 +1,11 @@
-using PostService.Models;
+using PostService.CommonTypes;
 
 namespace PostService.Dtos;
 
-public class PostingPostDto
+public class PostingPutDto
 {
+    public int Id { get; set; }
+    public float Price { get; set; }
     public string From { get; set; } = string.Empty;
     public string To { get; set; } = string.Empty;
     public string Content { get; set; } = string.Empty;
@@ -14,3 +16,4 @@ public class PostingPostDto
     public float Depth { get; set; }
     public float Value { get; set; }
 }
+

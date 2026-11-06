@@ -1,6 +1,6 @@
 using PostService.Dtos;
 using PostService.Mappings;
-using PostService.Services;
+using PostService.BusinessLogic;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IPostingService, PostingService>();
@@ -49,3 +49,4 @@ app.MapDelete("/postings/{id:int}", (int id, IPostingService service) =>
     service.Delete(id) == 0 ? Results.NotFound() : Results.NoContent());
 
 app.Run();
+

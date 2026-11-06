@@ -1,6 +1,6 @@
 using PostService.Models;
 
-namespace PostService.Services;
+namespace PostService.BusinessLogic;
 
 public interface IPostingService
 {
@@ -10,3 +10,4 @@ public interface IPostingService
     Posting? Update(Posting posting);
     int Delete(int postingId);
 }
+

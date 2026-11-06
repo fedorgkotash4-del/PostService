@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:5036
+# ПР-40. Запуск із кореня рішення: dotnet run --project PostService/PostService.csproj --launch-profile http
+# Send Request виконується зверху вниз. Очікування: 201, 200, 200, 200, 200, 204, 404.
+
+### 1. Create posting — 201, price = 60
+# @name create40
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Ivan",
+  "to": "Olena",
+  "content": "Component test",
+  "deliveryType": "Department",
+  "weight": 2,
+  "width": 20,
+  "height": 15,
+  "depth": 2,
+  "value": 100
+}
+
+### 2. Get all postings — 200
+GET {{baseUrl}}/postings
+
+### 3. Get created posting — 200
+GET {{baseUrl}}/postings/{{create40.response.body.$.id}}
+
+### 4. Update posting — 200
+PUT {{baseUrl}}/postings/{{create40.response.body.$.id}}
+Content-Type: application/json
+
+{"id":{{create40.response.body.$.id}},"from":"Ivan","to":"Olena","content":"Component test updated","deliveryType":"Courier","weight":0.6,"width":20,"height":15,"depth":2,"value":120,"price":20}
+
+### 5. Confirm update — 200
+GET {{baseUrl}}/postings/{{create40.response.body.$.id}}
+
+### 6. Delete posting — 204
+DELETE {{baseUrl}}/postings/{{create40.response.body.$.id}}
+
+### 7. Confirm deletion — 404
+GET {{baseUrl}}/postings/{{create40.response.body.$.id}}

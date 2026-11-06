@@ -1,5 +1,4 @@
 {
-  "folders": [
-    { "path": "." }
-  ]
+  "folders": [{"path": "PostServiceSolution"}],
+  "settings": {"dotnet.defaultSolution": "PostService.slnx"}
 }

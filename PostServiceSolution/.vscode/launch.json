@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "PostService — API",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/PostService/bin/Debug/net10.0/PostService.dll",
+      "cwd": "${workspaceFolder}/PostService",
+      "args": ["--urls", "http://localhost:5036"],
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "env": { "ASPNETCORE_ENVIRONMENT": "Development" }
+    }
+  ]
+}
