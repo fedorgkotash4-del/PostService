@@ -2,9 +2,8 @@ using PostService.CommonTypes;
 
 namespace PostService.Models;
 
-public class Posting
+public class Posting : ModelBase
 {
-    public int Id { get; set; }
     public string From { get; set; } = string.Empty;
     public string To { get; set; } = string.Empty;
     public string Content { get; set; } = string.Empty;

@@ -1,4 +1,5 @@
 using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using PostService.DataAccess;
 using PostService.Dtos;
 using PostService.Mappings;
@@ -10,14 +11,15 @@ builder.Services.AddScoped<IPostingService, PostingService>();
 var connectionString = builder.Configuration.GetConnectionString("Postings")
     ?? new SqliteConnectionStringBuilder
     {
-        DataSource = Path.Combine(builder.Environment.ContentRootPath, "PostingDb.db")
+        DataSource = Path.Combine(builder.Environment.ContentRootPath, PostingDbContext.DatabaseFileName)
     }.ToString();
-builder.Services.AddScoped<IPostingRepository>(_ => new PostingRepository(connectionString));
+builder.Services.AddDbContext<PostingDbContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddScoped<IPostingRepository, PostingRepository>();
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
-    var repository = (PostingRepository)scope.ServiceProvider.GetRequiredService<IPostingRepository>();
-    repository.CreateDb();
+    var dbContext = scope.ServiceProvider.GetRequiredService<PostingDbContext>();
+    dbContext.Database.EnsureCreated();
 }
 
 // Перетворення помилок вхідних даних сервісу на HTTP 400.
