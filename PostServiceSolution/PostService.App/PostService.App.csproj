@@ -1,7 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\PostService.Dtos\PostService.Dtos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="PostingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
   <PropertyGroup>
