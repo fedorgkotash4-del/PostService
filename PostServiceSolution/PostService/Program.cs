@@ -1,10 +1,24 @@
+using Microsoft.Data.Sqlite;
+using PostService.DataAccess;
 using PostService.Dtos;
 using PostService.Mappings;
 using PostService.BusinessLogic;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IPostingService, PostingService>();
+// Сталий шлях незалежно від запуску через термінал або відлагоджувач.
+var connectionString = builder.Configuration.GetConnectionString("Postings")
+    ?? new SqliteConnectionStringBuilder
+    {
+        DataSource = Path.Combine(builder.Environment.ContentRootPath, "PostingDb.db")
+    }.ToString();
+builder.Services.AddScoped<IPostingRepository>(_ => new PostingRepository(connectionString));
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var repository = (PostingRepository)scope.ServiceProvider.GetRequiredService<IPostingRepository>();
+    repository.CreateDb();
+}
 
 // Перетворення помилок вхідних даних сервісу на HTTP 400.
 app.Use(async (context, next) =>
@@ -49,4 +63,3 @@ app.MapDelete("/postings/{id:int}", (int id, IPostingService service) =>
     service.Delete(id) == 0 ? Results.NotFound() : Results.NoContent());
 
 app.Run();
-

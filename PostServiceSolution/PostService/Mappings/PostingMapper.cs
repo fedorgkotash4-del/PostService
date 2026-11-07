@@ -15,6 +15,7 @@ public static class PostingMapper
         Width = source.Width,
         Height = source.Height,
         Depth = source.Depth,
+        Description = source.Description,
         Value = source.Value
     };
 
@@ -30,6 +31,7 @@ public static class PostingMapper
         Width = source.Width,
         Height = source.Height,
         Depth = source.Depth,
+        Description = source.Description,
         Value = source.Value
     };
 
@@ -46,6 +48,7 @@ public static class PostingMapper
         Width = source.Width,
         Height = source.Height,
         Depth = source.Depth,
+        Description = source.Description,
         Value = source.Value
     };
 

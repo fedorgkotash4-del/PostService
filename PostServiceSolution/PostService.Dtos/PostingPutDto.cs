@@ -14,6 +14,6 @@ public class PostingPutDto
     public float Width { get; set; }
     public float Height { get; set; }
     public float Depth { get; set; }
-    public float Value { get; set; }
+    public float? Value { get; set; }
+    public string? Description { get; set; }
 }
-

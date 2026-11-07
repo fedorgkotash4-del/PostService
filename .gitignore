@@ -6,3 +6,9 @@ Reports/
 *.docx
 *.pdf
 Untitled-1.txt
+
+# Локальна база даних SQLite
+*.db
+*.db-shm
+*.db-wal
+*.db-journal

@@ -1,0 +1,70 @@
+@baseUrl = http://localhost:5036
+
+### 1. Створити перше відправлення
+# @name createPosting
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Олена",
+  "to": "Андрій",
+  "content": "Книги",
+  "deliveryType": "Courier",
+  "weight": 2.5,
+  "width": 30,
+  "height": 20,
+  "depth": 10,
+  "value": null,
+  "description": "Крихке"
+}
+
+### 2. Створити друге відправлення
+POST {{baseUrl}}/postings
+Content-Type: application/json
+
+{
+  "from": "Іван",
+  "to": "Марія",
+  "content": "Документи",
+  "deliveryType": "Department",
+  "weight": 0.5,
+  "width": 25,
+  "height": 2,
+  "depth": 18,
+  "value": 100,
+  "description": null
+}
+
+### 3. Отримати список. Повторити цей запит після перезапуску API.
+GET {{baseUrl}}/postings
+
+### 4. Отримати перше відправлення
+GET {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
+
+### 5. Оновити перше відправлення (CreatedAt не змінюється)
+PUT {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "id": {{createPosting.response.body.$.id}},
+  "from": "Олена",
+  "to": "Андрій",
+  "content": "Нові книги",
+  "deliveryType": "Courier",
+  "weight": 3,
+  "width": 30,
+  "height": 20,
+  "depth": 10,
+  "value": 250,
+  "price": 105,
+  "description": "Оновлено"
+}
+
+### 6. Перевірити оновлення
+GET {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
+
+### 7. Видалити перше відправлення (204)
+DELETE {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
+
+### 8. Після видалення очікується 404
+GET {{baseUrl}}/postings/{{createPosting.response.body.$.id}}
