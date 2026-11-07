@@ -1,4 +1,4 @@
-#nullable disable
+﻿#nullable disable
 namespace PostService.App;
 
 partial class PostingList
@@ -61,13 +61,13 @@ partial class PostingList
             colDescription,
             colCreatedAt
         });
-        gridPostings.Location = new Point(16, 66);
+        gridPostings.Location = new Point(16, 115);
         gridPostings.MultiSelect = false;
         gridPostings.Name = "gridPostings";
         gridPostings.ReadOnly = true;
         gridPostings.RowHeadersVisible = false;
         gridPostings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        gridPostings.Size = new Size(1248, 400);
+        gridPostings.Size = new Size(1248, 430);
         gridPostings.TabIndex = 0;
         // colId
         colId.DataPropertyName = "Id";
@@ -138,7 +138,7 @@ partial class PostingList
         colDepth.DefaultCellStyle.Format = "0.##";
         // colValue
         colValue.DataPropertyName = "Value";
-        colValue.HeaderText = "Оголошена вартість";
+        colValue.HeaderText = "Цінність, грн";
         colValue.Name = "colValue";
         colValue.ReadOnly = true;
         colValue.FillWeight = 100F;
@@ -186,7 +186,7 @@ partial class PostingList
         btnDelete.Click += btnDelete_Click;
         // lblStatus
         lblStatus.AutoSize = true;
-        lblStatus.Location = new Point(16, 24);
+        lblStatus.Location = new Point(16, 77);
         lblStatus.Name = "lblStatus";
         lblStatus.Size = new Size(130, 19);
         lblStatus.TabIndex = 3;
@@ -194,7 +194,12 @@ partial class PostingList
         // PostingList
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1280, 484);
+        ClientSize = new Size(1280, 565);
+        Controls.Add(new Label { Text="Облік поштових відправлень", Location=new Point(16,18), Size=new Size(470,35), Font=new Font("Segoe UI",16,FontStyle.Bold) });
+        btnCreate = new Button { Text="Нове відправлення", Name="btnCreate", Location=new Point(520,16), Size=new Size(200,34), BackColor=Color.FromArgb(35,99,180), ForeColor=Color.White, FlatStyle=FlatStyle.Flat, Anchor=AnchorStyles.Top|AnchorStyles.Right };
+        btnEdit = new Button { Text="Редагувати", Name="btnEdit", Location=new Point(736,16), Size=new Size(150,34), Anchor=AnchorStyles.Top|AnchorStyles.Right };
+        btnCreate.Click += btnCreate_Click; btnEdit.Click += btnEdit_Click;
+        Controls.Add(btnCreate); Controls.Add(btnEdit);
         Controls.Add(gridPostings);
         Controls.Add(btnDelete);
         Controls.Add(btnRefresh);
@@ -210,6 +215,8 @@ partial class PostingList
     }
 
     private DataGridView gridPostings;
+    private Button btnCreate;
+    private Button btnEdit;
     private Button btnDelete;
     private Button btnRefresh;
     private Label lblStatus;

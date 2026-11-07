@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\PostService.Dtos\PostService.Dtos.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="PostingEditor.cs"><SubType>Form</SubType></Compile>
     <Compile Update="PostingList.cs">
       <SubType>Form</SubType>
     </Compile>

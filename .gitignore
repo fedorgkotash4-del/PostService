@@ -1,4 +1,4 @@
-bin/
+﻿bin/
 obj/
 .vs/
 *.log
@@ -16,3 +16,6 @@ Untitled-1.txt
 # Особисті налаштування Visual Studio
 *.csproj.user
 *.suo
+
+# Готові локальні збірки
+Deliverables/
