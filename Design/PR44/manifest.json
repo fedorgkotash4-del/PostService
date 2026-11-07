@@ -1,0 +1,198 @@
+[
+  {
+    "id": "desktop-home",
+    "name": "Windows Forms — Головна",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/home.png"
+  },
+  {
+    "id": "desktop-list",
+    "name": "Windows Forms — Список відправлень",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/list.png"
+  },
+  {
+    "id": "desktop-new",
+    "name": "Windows Forms — Нове відправлення",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/new.png"
+  },
+  {
+    "id": "desktop-errors",
+    "name": "Windows Forms — Помилки форми",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/errors.png"
+  },
+  {
+    "id": "desktop-edit",
+    "name": "Windows Forms — Редагування",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/edit.png"
+  },
+  {
+    "id": "desktop-details",
+    "name": "Windows Forms — Деталі відправлення",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/details.png"
+  },
+  {
+    "id": "desktop-about",
+    "name": "Windows Forms — Про програму",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/about.png"
+  },
+  {
+    "id": "desktop-delete",
+    "name": "Windows Forms — Підтвердження видалення",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/delete.png"
+  },
+  {
+    "id": "desktop-deleted",
+    "name": "Windows Forms — Після видалення",
+    "width": 1280,
+    "height": 900,
+    "file": "desktop/deleted.png"
+  },
+  {
+    "id": "web-home",
+    "name": "Web Desktop — Головна",
+    "width": 1440,
+    "height": 960,
+    "file": "web/home.png"
+  },
+  {
+    "id": "web-list",
+    "name": "Web Desktop — Список відправлень",
+    "width": 1440,
+    "height": 960,
+    "file": "web/list.png"
+  },
+  {
+    "id": "web-new",
+    "name": "Web Desktop — Нове відправлення",
+    "width": 1440,
+    "height": 960,
+    "file": "web/new.png"
+  },
+  {
+    "id": "web-errors",
+    "name": "Web Desktop — Помилки форми",
+    "width": 1440,
+    "height": 960,
+    "file": "web/errors.png"
+  },
+  {
+    "id": "web-edit",
+    "name": "Web Desktop — Редагування",
+    "width": 1440,
+    "height": 960,
+    "file": "web/edit.png"
+  },
+  {
+    "id": "web-details",
+    "name": "Web Desktop — Деталі відправлення",
+    "width": 1440,
+    "height": 960,
+    "file": "web/details.png"
+  },
+  {
+    "id": "web-about",
+    "name": "Web Desktop — Про програму",
+    "width": 1440,
+    "height": 960,
+    "file": "web/about.png"
+  },
+  {
+    "id": "web-delete",
+    "name": "Web Desktop — Підтвердження видалення",
+    "width": 1440,
+    "height": 960,
+    "file": "web/delete.png"
+  },
+  {
+    "id": "web-deleted",
+    "name": "Web Desktop — Після видалення",
+    "width": 1440,
+    "height": 960,
+    "file": "web/deleted.png"
+  },
+  {
+    "id": "mobile-home",
+    "name": "Web Mobile — Головна",
+    "width": 390,
+    "height": 900,
+    "file": "mobile/home.png"
+  },
+  {
+    "id": "mobile-list",
+    "name": "Web Mobile — Список відправлень",
+    "width": 390,
+    "height": 1060,
+    "file": "mobile/list.png"
+  },
+  {
+    "id": "mobile-new",
+    "name": "Web Mobile — Нове відправлення",
+    "width": 390,
+    "height": 1580,
+    "file": "mobile/new.png"
+  },
+  {
+    "id": "mobile-errors",
+    "name": "Web Mobile — Помилки форми",
+    "width": 390,
+    "height": 1740,
+    "file": "mobile/errors.png"
+  },
+  {
+    "id": "mobile-edit",
+    "name": "Web Mobile — Редагування",
+    "width": 390,
+    "height": 1580,
+    "file": "mobile/edit.png"
+  },
+  {
+    "id": "mobile-details",
+    "name": "Web Mobile — Деталі відправлення",
+    "width": 390,
+    "height": 1220,
+    "file": "mobile/details.png"
+  },
+  {
+    "id": "mobile-about",
+    "name": "Web Mobile — Про програму",
+    "width": 390,
+    "height": 900,
+    "file": "mobile/about.png"
+  },
+  {
+    "id": "mobile-delete",
+    "name": "Web Mobile — Підтвердження видалення",
+    "width": 390,
+    "height": 1060,
+    "file": "mobile/delete.png"
+  },
+  {
+    "id": "mobile-deleted",
+    "name": "Web Mobile — Після видалення",
+    "width": 390,
+    "height": 1060,
+    "file": "mobile/deleted.png"
+  },
+  {
+    "id": "navigation",
+    "name": "Навігація та стани макетів",
+    "width": 1440,
+    "height": 1000,
+    "file": "navigation.png"
+  }
+]
