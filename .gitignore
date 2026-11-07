@@ -12,3 +12,7 @@ Untitled-1.txt
 *.db-shm
 *.db-wal
 *.db-journal
+
+# Особисті налаштування Visual Studio
+*.csproj.user
+*.suo

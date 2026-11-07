@@ -5,13 +5,56 @@
       "name": "PostService — API",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build",
       "program": "${workspaceFolder}/PostService/bin/Debug/net10.0/PostService.dll",
       "cwd": "${workspaceFolder}/PostService",
-      "args": ["--urls", "http://localhost:5036"],
+      "args": [
+        "--urls",
+        "http://localhost:5036"
+      ],
       "console": "internalConsole",
       "stopAtEntry": false,
-      "env": { "ASPNETCORE_ENVIRONMENT": "Development" }
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "preLaunchTask": "build"
+    },
+    {
+      "name": "PostService — Windows Forms",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/PostService.App/bin/Debug/net10.0-windows/PostService.App.dll",
+      "cwd": "${workspaceFolder}/PostService.App",
+      "console": "internalConsole",
+      "env": {
+        "POSTSERVICE_API_URL": "http://localhost:5036/"
+      }
+    },
+    {
+      "name": "PostService — API (спільний запуск)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/PostService/bin/Debug/net10.0/PostService.dll",
+      "cwd": "${workspaceFolder}/PostService",
+      "args": [
+        "--urls",
+        "http://localhost:5036"
+      ],
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "PostService — сервер і клієнт",
+      "configurations": [
+        "PostService — API (спільний запуск)",
+        "PostService — Windows Forms"
+      ],
+      "preLaunchTask": "build",
+      "stopAll": true
     }
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PostService.App": {
+      "commandName": "Project",
+      "environmentVariables": { "POSTSERVICE_API_URL": "http://localhost:5036/" }
+    }
+  }
+}
