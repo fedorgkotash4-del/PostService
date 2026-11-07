@@ -1,0 +1,6 @@
+﻿@page
+@{ ViewData["Title"] = "Про програму"; }
+<div class="page-heading"><div><p class="eyebrow">ЗРУЧНИЙ ОБЛІК</p><h1>Про програму</h1></div><a class="button secondary" asp-page="/Index">На головну</a></div>
+<section class="panel about-intro"><span class="pill">PostService</span><h2>Один список — повна картина відправлень.</h2><p class="lead">Вебзастосунок для щоденної роботи з поштовими відправленнями. У ньому можна зберігати дані відправника й одержувача, вміст посилки, спосіб доставки, вагу, габарити та оголошену цінність.</p></section>
+<div class="about-grid"><section class="panel"><h3>Що можна зробити</h3><ul class="feature-list"><li>Створити нове відправлення</li><li>Знайти запис і переглянути деталі</li><li>Змінити дані або скасувати редагування</li><li>Видалити запис після підтвердження</li></ul></section><section class="panel"><h3>Як зберігаються дані</h3><p>Вебкабінет працює через REST API PostService. Записи зберігаються у спільній базі сервера та доступні також у Windows Forms клієнті.</p><p>Вартість нового відправлення визначається сервером після збереження. Перед надсиланням форма перевіряє обов’язкові поля та числові значення.</p></section></div>
+<div class="actions"><a class="button primary" asp-page="/Postings/Index">Перейти до відправлень →</a></div>

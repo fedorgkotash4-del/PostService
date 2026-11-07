@@ -1,0 +1,11 @@
+﻿@page "{id:int}"
+@model PostService.WebApp.Pages.Postings.DeleteModel
+@{ ViewData["Title"] = "Видалення відправлення"; }
+<div class="page-heading"><div><a class="back-link" asp-page="Index">← До списку</a><h1>Видалення відправлення</h1></div></div>
+<section class="panel delete-panel"><span class="warning-mark" aria-hidden="true">!</span><h2>Видалити це відправлення?</h2><p>Запис буде видалено зі спільного списку. Цю дію не можна скасувати.</p>
+@if (Model.Error is not null) { <div class="notice error" role="alert">@Model.Error</div> }
+@if (Model.Posting is { } p) {
+<div class="delete-preview"><strong>Відправлення №@p.Id</strong><p>@p.From <span aria-hidden="true">→</span> @p.To</p><span>@p.Content · @p.Price.ToString("N2") грн</span></div>
+<form method="post" data-save-form><div class="actions"><a class="button secondary" asp-page="Index" autofocus>Скасувати</a><button type="submit" class="button danger">Так, видалити</button></div></form>
+} else { <a class="button secondary" asp-page="Index">Повернутися до списку</a> }
+</section>

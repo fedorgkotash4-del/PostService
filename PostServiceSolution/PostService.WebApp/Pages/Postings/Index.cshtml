@@ -1,0 +1,21 @@
+﻿@page
+@model PostService.WebApp.Pages.Postings.IndexModel
+@{ ViewData["Title"] = "Відправлення"; }
+<div class="page-heading"><div><p class="eyebrow">РОБОТА З ПОСИЛКАМИ</p><h1>Список відправлень</h1></div><a class="button primary" asp-page="Edit">＋ Нове відправлення</a></div>
+@if (!string.IsNullOrEmpty(Model.Success)) { <div class="notice success" role="status">✓ @Model.Success</div> }
+@if (Model.Error is not null) { <section class="notice error" role="alert"><h2>Список поки недоступний</h2><p>@Model.Error</p><a class="button secondary" asp-page="Index">Спробувати знову</a></section> }
+else {
+<section class="panel list-panel">
+    <div class="list-toolbar"><form method="get" class="search" role="search"><label class="sr-only" for="q">Пошук відправлення</label><input id="q" name="q" value="@Model.Q" placeholder="Номер, ім’я або вміст…" /><button class="button secondary" type="submit">Знайти</button></form><a class="button quiet" asp-page="Index">↻ Оновити</a></div>
+    <div class="list-meta"><span>Усього відправлень <strong>@Model.Total</strong></span>@if (!string.IsNullOrWhiteSpace(Model.Q)) { <span>Знайдено @Model.Postings.Count <a asp-page="Index">Скинути пошук</a></span> }</div>
+    @if (Model.Postings.Count == 0) {
+        <div class="empty"><span class="empty-icon" aria-hidden="true">▤</span><h2>@(Model.Total == 0 ? "Ваш список ще порожній" : "Нічого не знайдено")</h2><p>@(Model.Total == 0 ? "Створіть перше відправлення — і всі його дані будуть тут." : "Спробуйте інший номер, ім’я або вміст відправлення.")</p><a class="button primary" asp-page="Edit">Створити відправлення</a></div>
+    } else {
+    <table class="postings"><caption class="sr-only">Поштові відправлення та дії з ними</caption><thead><tr><th scope="col">№</th><th scope="col">Відправник → одержувач</th><th scope="col">Вміст</th><th scope="col">Доставка</th><th scope="col">Ціна</th><th scope="col">Дії</th></tr></thead><tbody>
+    @foreach (var posting in Model.Postings) {
+        <tr><td data-label="Номер"><a class="record-id" asp-page="Details" asp-route-id="@posting.Id">#@posting.Id</a></td><td data-label="Маршрут"><strong>@posting.From</strong><span class="recipient">→ @posting.To</span></td><td data-label="Вміст">@posting.Content</td><td data-label="Доставка"><span class="delivery">@Display.Delivery(posting.DeliveryType)</span><span class="recipient">@posting.Weight.ToString("0.##") кг</span></td><td data-label="Ціна" class="price"><div class="amount">@posting.Price.ToString("N2") <span>грн</span></div></td><td data-label="Дії"><div class="row-actions"><a asp-page="Edit" asp-route-id="@posting.Id" aria-label="Редагувати відправлення @posting.Id">Редагувати</a><a asp-page="Details" asp-route-id="@posting.Id" aria-label="Деталі відправлення @posting.Id">Деталі</a><a class="danger-link" asp-page="Delete" asp-route-id="@posting.Id" aria-label="Видалити відправлення @posting.Id">Видалити</a></div></td></tr>
+    }
+    </tbody></table>
+    }
+</section>
+}

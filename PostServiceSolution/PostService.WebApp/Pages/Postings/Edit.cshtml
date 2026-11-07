@@ -1,0 +1,26 @@
+﻿@page "{id:int?}"
+@model PostService.WebApp.Pages.Postings.EditModel
+@{ ViewData["Title"] = Model.Title; }
+<div class="page-heading"><div><a class="back-link" asp-page="Index">← До списку відправлень</a><h1>@Model.Title</h1></div><span class="pill">@(Model.PostingId.HasValue ? "Редагування" : "Створення")</span></div>
+<form method="post" class="panel editor" data-save-form novalidate>
+    <div class="form-intro"><h2>Дані відправлення</h2><p>Поля зі знаком * обов’язкові. Для дробових чисел використовуйте кому або крапку.</p></div>
+    @if (!ViewData.ModelState.IsValid) {
+        <div class="notice error validation-summary" role="alert" tabindex="-1" data-validation-summary><h3>Не вдалося зберегти відправлення</h3><div asp-validation-summary="All"></div></div>
+    }
+    @if (Model.CanEdit) {
+    <div class="form-grid">
+<div class="field wide"><label asp-for="Input.From">Відправник та адреса *</label><input asp-for="Input.From" placeholder="Наприклад, Ірина Бондар, м. Львів" aria-describedby="error-From" /><span asp-validation-for="Input.From" id="error-From" class="field-error"></span></div>
+<div class="field wide"><label asp-for="Input.To">Одержувач та адреса *</label><input asp-for="Input.To" placeholder="Наприклад, Назар Коваль, м. Київ" aria-describedby="error-To" /><span asp-validation-for="Input.To" id="error-To" class="field-error"></span></div>
+<div class="field wide"><label asp-for="Input.Content">Вміст відправлення *</label><input asp-for="Input.Content" placeholder="Що містить посилка?" aria-describedby="error-Content" /><span asp-validation-for="Input.Content" id="error-Content" class="field-error"></span></div>
+<div class="field wide"><label asp-for="Input.DeliveryType">Спосіб доставки *</label><select asp-for="Input.DeliveryType" aria-describedby="error-DeliveryType"><option value="Department">До відділення</option><option value="Courier">Кур’єром</option><option value="ExpressCourier">Експрес-кур’єром</option></select><span asp-validation-for="Input.DeliveryType" id="error-DeliveryType" class="field-error"></span></div><div class="field"><label asp-for="Input.Weight">Вага, кг *</label><input asp-for="Input.Weight" inputmode="decimal" placeholder="2,5" aria-describedby="error-Weight" /><span asp-validation-for="Input.Weight" id="error-Weight" class="field-error"></span></div>
+<div class="field"><label asp-for="Input.Width">Ширина, см *</label><input asp-for="Input.Width" inputmode="decimal" placeholder="30" aria-describedby="error-Width" /><span asp-validation-for="Input.Width" id="error-Width" class="field-error"></span></div>
+<div class="field"><label asp-for="Input.Height">Висота, см *</label><input asp-for="Input.Height" inputmode="decimal" placeholder="20" aria-describedby="error-Height" /><span asp-validation-for="Input.Height" id="error-Height" class="field-error"></span></div>
+<div class="field"><label asp-for="Input.Depth">Глибина, см *</label><input asp-for="Input.Depth" inputmode="decimal" placeholder="10" aria-describedby="error-Depth" /><span asp-validation-for="Input.Depth" id="error-Depth" class="field-error"></span></div>
+<div class="field"><label asp-for="Input.Value">Оголошена цінність, грн</label><input asp-for="Input.Value" inputmode="decimal" placeholder="Необов’язково" aria-describedby="error-Value" /><span asp-validation-for="Input.Value" id="error-Value" class="field-error"></span></div>
+<div class="field"><label asp-for="Input.Price">Ціна доставки, грн</label>
+@if (Model.PostingId.HasValue) { <input asp-for="Input.Price" inputmode="decimal" aria-describedby="error-Price" /><span asp-validation-for="Input.Price" id="error-Price" class="field-error"></span> }
+else { <div class="calculated">Розрахуємо після збереження</div><p class="hint">Ціну визначає сервер за вагою та способом доставки.</p> }
+</div><div class="field wide"><label asp-for="Input.Description">Опис</label><textarea asp-for="Input.Description" rows="3" placeholder="Додаткові відомості за потреби"></textarea></div>
+    </div><div class="form-footer"><p>Після збереження ви повернетеся до списку.</p><div class="actions"><a class="button secondary" asp-page="Index">Скасувати</a><button class="button primary" type="submit">Зберегти відправлення</button></div></div>
+    } else { <a class="button secondary" asp-page="Index">Повернутися до списку</a> }
+</form>

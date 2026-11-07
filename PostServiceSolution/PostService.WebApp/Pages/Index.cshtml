@@ -1,0 +1,14 @@
+﻿@page
+@{ ViewData["Title"] = "Головна"; }
+<div class="page-heading"><div><p class="eyebrow">ВАШ ПОШТОВИЙ КАБІНЕТ</p><h1>Головна</h1></div><span class="pill">Усе під рукою</span></div>
+<section class="hero panel">
+    <div><p class="eyebrow">ВІД ВІДПРАВНИКА ДО ОДЕРЖУВАЧА</p><h2>Кожна посилка.<br />На своєму місці.</h2>
+    <p class="lead">Створюйте відправлення, уточнюйте дані та знаходьте потрібний запис у спільному списку.</p>
+    <div class="actions"><a class="button primary" asp-page="/Postings/Index">До списку відправлень <span aria-hidden="true">→</span></a><a class="button secondary" asp-page="/About">Про програму</a></div></div>
+    <div class="parcel-art" aria-hidden="true"><div class="parcel"><span></span><i></i></div><span class="parcel-stamp">POST / SERVICE</span><span class="route-line"></span></div>
+</section>
+<div class="home-grid">
+    <a class="panel shortcut" asp-page="/Postings/Edit"><span class="shortcut-icon" aria-hidden="true">＋</span><h3>Нове відправлення</h3><p>Вкажіть маршрут і параметри посилки. Вартість розрахуємо під час збереження.</p><span class="text-link">Створити <span aria-hidden="true">↗</span></span></a>
+    <a class="panel shortcut" asp-page="/Postings/Index"><span class="shortcut-icon" aria-hidden="true">▤</span><h3>Список відправлень</h3><p>Переглядайте деталі, редагуйте дані та видаляйте записи, які більше не потрібні.</p><span class="text-link">Переглянути <span aria-hidden="true">↗</span></span></a>
+    <section class="workflow"><p class="eyebrow">ПРОСТИЙ ПОРЯДОК РОБОТИ</p><ol><li>Створіть відправлення</li><li>Перевірте дані й збережіть</li><li>Поверніться до оновленого списку</li></ol></section>
+</div>

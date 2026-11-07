@@ -1,0 +1,29 @@
+﻿@{ var path = Context.Request.Path.Value ?? "/"; }
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · PostService</title>
+    <link rel="icon" href="~/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<a class="skip" href="#main">До вмісту</a>
+<aside class="sidebar">
+    <a class="brand" asp-page="/Index"><span class="brand-mark" aria-hidden="true">↗</span> PostService</a>
+    <p class="brand-note">Облік поштових відправлень</p>
+    <nav aria-label="Головна навігація">
+        <a asp-page="/Index" class="@(path == "/" ? "active" : "")" aria-current="@(path == "/" ? "page" : null)"><span aria-hidden="true">⌂</span> Головна</a>
+        <a asp-page="/Postings/Index" class="@(path.StartsWith("/Postings") ? "active" : "")" aria-current="@(path.StartsWith("/Postings") ? "page" : null)"><span aria-hidden="true">▤</span> Відправлення</a>
+        <a asp-page="/About" class="@(path == "/About" ? "active" : "")" aria-current="@(path == "/About" ? "page" : null)"><span aria-hidden="true">ⓘ</span> Про програму</a>
+    </nav>
+    <div class="sidebar-footer"><span class="status-dot"></span> Робоче місце оператора</div>
+</aside>
+<div class="workspace">
+    <header class="topbar"><span>Поштова служба <span class="separator">/</span> @ViewData["Title"]</span><span class="web-label">Вебкабінет</span></header>
+    <main id="main" tabindex="-1">@RenderBody()</main>
+    <footer class="footer">PostService <span>Порядок у кожному відправленні.</span></footer>
+</div>
+<script src="~/js/site.js" asp-append-version="true" defer></script>
+</body>
+</html>

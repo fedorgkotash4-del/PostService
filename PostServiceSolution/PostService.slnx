@@ -13,5 +13,6 @@
   </Folder>
   <Folder Name="/04-Application Client/">
     <Project Path="PostService.App/PostService.App.csproj" />
+    <Project Path="PostService.WebApp/PostService.WebApp.csproj" />
   </Folder>
 </Solution>

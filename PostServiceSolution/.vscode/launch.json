@@ -44,6 +44,26 @@
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    {
+      "name": "PostService — вебклієнт",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/PostService.WebApp/bin/Debug/net10.0/PostService.WebApp.dll",
+      "cwd": "${workspaceFolder}/PostService.WebApp",
+      "args": [
+        "--urls",
+        "http://localhost:5080"
+      ],
+      "console": "internalConsole",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s"
+      }
     }
   ],
   "compounds": [
@@ -52,6 +72,15 @@
       "configurations": [
         "PostService — API (спільний запуск)",
         "PostService — Windows Forms"
+      ],
+      "preLaunchTask": "build",
+      "stopAll": true
+    },
+    {
+      "name": "PostService — сервер і вебклієнт",
+      "configurations": [
+        "PostService — API (спільний запуск)",
+        "PostService — вебклієнт"
       ],
       "preLaunchTask": "build",
       "stopAll": true

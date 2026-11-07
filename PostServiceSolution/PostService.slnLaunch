@@ -2,8 +2,27 @@
   {
     "Name": "PostService — сервер і клієнт",
     "Projects": [
-      { "Path": "PostService\\PostService.csproj", "Action": "Start" },
-      { "Path": "PostService.App\\PostService.App.csproj", "Action": "Start" }
+      {
+        "Path": "PostService\\PostService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "PostService.App\\PostService.App.csproj",
+        "Action": "Start"
+      }
+    ]
+  },
+  {
+    "Name": "PostService — сервер і вебклієнт",
+    "Projects": [
+      {
+        "Path": "PostService\\PostService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "PostService.WebApp\\PostService.WebApp.csproj",
+        "Action": "Start"
+      }
     ]
   }
 ]

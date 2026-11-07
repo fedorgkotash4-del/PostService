@@ -1,0 +1,8 @@
+﻿@page "{id:int}"
+@model PostService.WebApp.Pages.Postings.DetailsModel
+@{ ViewData["Title"] = "Деталі відправлення"; }
+<div class="page-heading"><div><a class="back-link" asp-page="Index">← До списку</a><h1>Деталі відправлення</h1></div></div>
+@if (Model.Error is not null) { <div class="notice error" role="alert">@Model.Error</div> }
+@if (Model.Posting is { } p) {
+<section class="panel details"><div class="details-heading"><div><p class="eyebrow">ПОШТОВЕ ВІДПРАВЛЕННЯ</p><h2>№@p.Id</h2></div><span class="pill">@Display.Delivery(p.DeliveryType)</span></div><dl class="details-grid"><div><dt>Відправник</dt><dd>@p.From</dd></div><div><dt>Одержувач</dt><dd>@p.To</dd></div><div><dt>Вміст</dt><dd>@p.Content</dd></div><div><dt>Вага</dt><dd>@p.Weight.ToString("0.##") кг</dd></div><div><dt>Габарити</dt><dd>@p.Width × @p.Height × @p.Depth см</dd></div><div><dt>Оголошена цінність</dt><dd>@(p.Value.HasValue ? p.Value.Value.ToString("N2") + " грн" : "Не вказано")</dd></div><div><dt>Ціна доставки</dt><dd class="big-price">@p.Price.ToString("N2") грн</dd></div><div><dt>Створено</dt><dd>@p.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</dd></div><div class="wide"><dt>Опис</dt><dd>@(string.IsNullOrWhiteSpace(p.Description) ? "Не вказано" : p.Description)</dd></div></dl><div class="actions"><a class="button primary" asp-page="Edit" asp-route-id="@p.Id">Редагувати</a><a class="button secondary" asp-page="Index">До списку</a><a class="button danger-outline" asp-page="Delete" asp-route-id="@p.Id">Видалити</a></div></section>
+}
